@@ -91,6 +91,10 @@ public class ContainerWithSLF4JTest {
 					return "changeTag";
 				}
 				@Override
+				public String getFullName() {
+					return m.getName() + "." + getName();
+				}
+				@Override
 				public Module<A> getModule() {
 					return m;
 				}
@@ -105,6 +109,10 @@ public class ContainerWithSLF4JTest {
 				@Override
 				public String getName() {
 					return "set";
+				}
+				@Override
+				public String getFullName() {
+					return m.getName() + "." + getName();
 				}
 				@Override
 				public Module<A> getModule() {

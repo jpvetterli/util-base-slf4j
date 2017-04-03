@@ -75,16 +75,15 @@ public class ContainerWithSLF4JTest {
 		}
 
 		@Override
-		public boolean initialize() {
+		public void initialize() {
 			b.set("This is module \"" + getName() + "\" starting");
 			b.changeTag("xyzzy");
-			return true;
 		}
 
 		@Override
-		public void registerCommands(CommandRegistry registry) {
+		public void registerCommands(ConfigurationRegistry<?> registry) {
 			final Module<A> m = this;
-			registry.register(
+			registry.addUnique(
 				new Command<ContainerWithSLF4JTest.A>() {
 				@Override
 				public String getName() {
@@ -99,12 +98,11 @@ public class ContainerWithSLF4JTest {
 					return m;
 				}
 				@Override
-				public boolean execute(String parameters) {
+				public void execute(String parameters) {
 					b.changeTag(parameters);
-					return true;
 				}
 			});
-		registry.register(
+		registry.addUnique(
 				new Command<ContainerWithSLF4JTest.A>() {
 				@Override
 				public String getName() {
@@ -119,9 +117,8 @@ public class ContainerWithSLF4JTest {
 					return m;
 				}
 				@Override
-				public boolean execute(String parameters) {
+				public void execute(String parameters) {
 					b.set(parameters);
-					return true;
 				}
 			});
 		}
@@ -170,8 +167,7 @@ public class ContainerWithSLF4JTest {
 		try {
 			c.run(new String[]{
 					String.format("module=[name = a class=%s require=b]", AModule.class.getName()),
-					String.format("module=[name = b class=%s]", BModule.class.getName()),
-					"config=[b=[tag=[This tag was modified.]]]",
+					String.format("module=[name = b class=%s config=[tag=[This tag was modified.]]]", BModule.class.getName()),
 			});
 			c.shutdown();
 			List<String> texts = ((B) c.getModule("b").getObject()).getRecords();
@@ -188,8 +184,7 @@ public class ContainerWithSLF4JTest {
 		try {
 			c.run(new String[]{
 					String.format("module=[name = a class=%s require=b]", AModule.class.getName()),
-					String.format("module=[name = b class=%s]", BModule.class.getName()),
-					"config=[b=[tag=[This tag was modified.]]]",
+					String.format("module=[name = b class=%s config=[tag=[This tag was modified.]]]", BModule.class.getName()),
 					"exec=[a.set=[exec1] a.changeTag=[exec2] a.set=[exec3]]"
 			});
 			c.shutdown();
@@ -224,7 +219,7 @@ public class ContainerWithSLF4JTest {
 			c.run(new String[]{"module=[name = foo class=foo]"});
 			fail("exception expected");
 		} catch (Exception e) {
-			assertTrue(e.getMessage().startsWith("C14"));
+			assertTrue(e.getMessage().startsWith("C03"));
 		} finally {
 			c.shutdown();
 		}
@@ -237,7 +232,7 @@ public class ContainerWithSLF4JTest {
 			c.run(new String[]{"module=[name = foo class=java.lang.String]"});
 			fail("exception expected");
 		} catch (Exception e) {
-			assertTrue(e.getMessage().startsWith("C14"));
+			assertTrue(e.getMessage().startsWith("C03"));
 		} finally {
 			c.shutdown();
 		}

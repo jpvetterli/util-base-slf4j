@@ -57,8 +57,32 @@ public class ContainerWithSLF4JTest {
 		
 		public AModule(String name) {
 			super(name);
+			addCommands();
 		}
 
+		private void addCommands() {
+			add(new Command<ContainerWithSLF4JTest.A>() {
+				@Override
+				public String getName() {
+					return "changeTag";
+				}
+				@Override
+				public void execute(String parameters) {
+					b.changeTag(parameters);
+				}
+			});
+			add(new Command<ContainerWithSLF4JTest.A>() {
+				@Override
+				public String getName() {
+						return "set";
+				}
+				@Override
+				public void execute(String parameters) {
+					b.set(parameters);
+				}
+			});
+		}
+		
 		@Override
 		public A getObject() {
 			return new A();
@@ -71,56 +95,9 @@ public class ContainerWithSLF4JTest {
 		}
 
 		@Override
-		public void configure(Args ignore) {
-		}
-
-		@Override
 		public void initialize() {
 			b.set("This is module \"" + getName() + "\" starting");
 			b.changeTag("xyzzy");
-		}
-
-		@Override
-		public void registerCommands(ConfigurationRegistry<?> registry) {
-			final Module<A> m = this;
-			registry.addUnique(
-				new Command<ContainerWithSLF4JTest.A>() {
-				@Override
-				public String getName() {
-					return "changeTag";
-				}
-				@Override
-				public String getFullName() {
-					return m.getName() + "." + getName();
-				}
-				@Override
-				public Module<A> getModule() {
-					return m;
-				}
-				@Override
-				public void execute(String parameters) {
-					b.changeTag(parameters);
-				}
-			});
-		registry.addUnique(
-				new Command<ContainerWithSLF4JTest.A>() {
-				@Override
-				public String getName() {
-					return "set";
-				}
-				@Override
-				public String getFullName() {
-					return m.getName() + "." + getName();
-				}
-				@Override
-				public Module<A> getModule() {
-					return m;
-				}
-				@Override
-				public void execute(String parameters) {
-					b.set(parameters);
-				}
-			});
 		}
 
 		@Override

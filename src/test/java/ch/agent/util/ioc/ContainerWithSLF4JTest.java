@@ -62,24 +62,16 @@ public class ContainerWithSLF4JTest {
 
 		private void addCommands() {
 			add(new Command<ContainerWithSLF4JTest.A>() {
-				@Override
-				public String getName() {
-					return "changeTag";
-				}
-				@Override
-				public void execute(String parameters) {
-					b.changeTag(parameters);
-				}
+				private String name = "changeTag";
+				public String getName() {return name;}
+				public void rename(String name) {this.name = name;}
+				public void execute(String parameters) {b.changeTag(parameters);}
 			});
 			add(new Command<ContainerWithSLF4JTest.A>() {
-				@Override
-				public String getName() {
-						return "set";
-				}
-				@Override
-				public void execute(String parameters) {
-					b.set(parameters);
-				}
+				private String name = "set";
+				public String getName() {return name;}
+				public void rename(String name) {this.name = name;}
+				public void execute(String parameters) {b.set(parameters);}
 			});
 		}
 		

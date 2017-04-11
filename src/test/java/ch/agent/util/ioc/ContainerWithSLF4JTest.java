@@ -64,12 +64,14 @@ public class ContainerWithSLF4JTest {
 			add(new Command<ContainerWithSLF4JTest.A>() {
 				private String name = "changeTag";
 				public String getName() {return name;}
+				public boolean isParameterless() {return false;}
 				public void rename(String name) {this.name = name;}
 				public void execute(String parameters) {b.changeTag(parameters);}
 			});
 			add(new Command<ContainerWithSLF4JTest.A>() {
 				private String name = "set";
 				public String getName() {return name;}
+				public boolean isParameterless() {return false;}
 				public void rename(String name) {this.name = name;}
 				public void execute(String parameters) {b.set(parameters);}
 			});

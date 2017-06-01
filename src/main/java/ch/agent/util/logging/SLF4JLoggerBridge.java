@@ -6,12 +6,16 @@ import ch.agent.util.base.LazyString;
 
 /**
  * SLF4J implementation of logger bridge.
- *
  */
 public class SLF4JLoggerBridge implements LoggerBridge {
 
 	private Logger logger;
 	
+	/**
+	 * Constructor.
+	 * 
+	 * @param logger the slf4j logger
+	 */
 	public SLF4JLoggerBridge(Logger logger) {
 		this.logger = logger;
 	}

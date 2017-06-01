@@ -24,6 +24,8 @@ public final class SLF4JLoggerBridgeFactory implements LoggerBridgeFactory {
 	private static SLF4JLoggerBridgeFactory factory = new SLF4JLoggerBridgeFactory();
 	
 	/**
+	 * Get the factory singleton.
+	 * 
 	 * @return the SLF4JLoggerBridgeFactory instance
 	 */
 	public static SLF4JLoggerBridgeFactory getInstance() {

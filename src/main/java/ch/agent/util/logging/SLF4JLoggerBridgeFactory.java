@@ -3,7 +3,7 @@ package ch.agent.util.logging;
 import org.slf4j.LoggerFactory;
 
 /**
- * A logger bridge factory for the SLF4J logger factory.
+ * A logger bridge factory for the SLF4J logger bridge.
  * <p>
  * To use it, include something like this early in your code
  * or use the equivalent on the java invocation command line:
@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
  *  		"LoggerBridgeFactory", 
  *  		"ch.agent.util.logging.SLF4JLoggerBridgeFactory");
  * 	}
- * 
  * </code>
  * </pre>
  */

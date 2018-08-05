@@ -65,6 +65,9 @@
         <version>2.8.1</version>
         <configuration>
           <stylesheetfile>javadoc.css</stylesheetfile>
+          <!--links>
+            <link>file:///MASTER/data/git/util-base/target/apidocs/</link>
+          </links-->
           <show>protected</show>
           <nohelp>true</nohelp>
           <additionalparam>-Xdoclint:none</additionalparam>

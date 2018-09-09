@@ -16,13 +16,11 @@
     </license>
   </licenses>
 
-  <!--
   <scm>
     <connection>scm:git:git@github.com:jpvetterli/util-base-slf4j.git</connection>
     <developerConnection>scm:git:git@github.com:jpvetterli/util-base-slf4j.git</developerConnection>
     <url>https://github.com/jpvetterli/util-base-slf4j.git</url>
   </scm>
-  -->
 
   <developers>
     <developer>
